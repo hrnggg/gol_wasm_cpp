@@ -10,7 +10,7 @@ source </path/to/emsdk>/emsdk_env.sh
 ```
 
 ### build
-``
+```
 em++ main.cpp -s WASM=1 -O3 -o index.js
 ```
 
