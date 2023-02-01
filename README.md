@@ -2,6 +2,7 @@
 
 ## Requirements
 - [Emscripten](https://emscripten.org/index.html)
+- C++17
 
 ## Usage
 ### setup
