@@ -1,21 +1,26 @@
-CC=g++
+EMCC=em++
 CFLAGS=-std=c++17 -O3
-SRCS=main.cpp
+EMCCFLAGS=-s WASM=1 -s USE_SDL=2 -s EXPORT_ES6
+EMRUNFLAGS=--browser chrome
+SRCS=sdl_example.cpp
 OBJS=$(SRCS:%.cpp=%.o)
+TGT=index.js
+WASMOBJ=$(TGT:%.js=%.wasm)
 
-# automatically generate target files if it does not exist or is older than files it depens on.
-build: $(OBJS)
-	$(CC) $(CFLAGS) -o main.out $(OBJS)
+build: $(OBJS) $(TGT)
+
+run: build
+	emrun $(EMRUNFLAGS) index.html
 
 # $<: dependency
 # $@: target
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(EMCC) $(CFLAGS) -c $< -o $@
 
-run: build
-	./main.out
+$(TGT): $(SRCS)
+	$(EMCC) $(CFLAGS) $(EMCCFLAGS) $(OBJS) -o $(TGT)
 
 clean:
-	rm -f *.o *.out
+	rm -f *.o *.wasm $(TGT)
 
 .PHONY: build run clean

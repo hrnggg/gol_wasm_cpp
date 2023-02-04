@@ -1,8 +1,9 @@
-# game of life (wasm+cpp)
+# wasm+cpp game of life
 
 ## Requirements
 - [Emscripten](https://emscripten.org/index.html)
 - C++17
+- ES2015(ES6)
 
 ## Usage
 ### setup
@@ -10,12 +11,15 @@
 source </path/to/emsdk>/emsdk_env.sh
 ```
 
-### build
+### build & run
 ```
-em++ main.cpp -s WASM=1 -O3 -o index.js
+make build
 ```
 
 ### run
 ```
-emrun --browser chrome index.html
+make run
 ```
+
+## References
+- [Drawing to canvas in Emscripten](https://web.dev/drawing-to-canvas-in-emscripten/)

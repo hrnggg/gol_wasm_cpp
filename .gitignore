@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# WASM binary
+*.wasm
+
+# WASM auto-generated code
+index.js
