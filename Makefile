@@ -2,7 +2,7 @@ EMCC=em++
 CFLAGS=-std=c++17 -O3
 EMCCFLAGS=-s WASM=1 -s USE_SDL=2 -s EXPORT_ES6
 EMRUNFLAGS=--browser chrome
-SRCS=sdl_example.cpp
+SRCS=main.cpp
 OBJS=$(SRCS:%.cpp=%.o)
 TGT=index.js
 WASMOBJ=$(TGT:%.js=%.wasm)
