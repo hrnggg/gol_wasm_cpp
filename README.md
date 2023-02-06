@@ -23,3 +23,5 @@ make run
 
 ## References
 - [Drawing to canvas in Emscripten](https://web.dev/drawing-to-canvas-in-emscripten/)
+- [d0iasm/life-game.cpp](https://github.com/d0iasm/life-game.cpp)
+- [EthanJamesLew/GameOfLife](https://github.com/EthanJamesLew/GameOfLife)
