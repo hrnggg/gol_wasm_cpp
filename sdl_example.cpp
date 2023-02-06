@@ -10,16 +10,9 @@ const int WINDOW_WIDTH = 300, WINDOW_HEIGHT = 300;
 SDL_Window *window;
 SDL_Renderer *renderer;
 
-/*
-bool handle_events() {
-  SDL_Event event;
-  SDL_PollEvent(&event);
-  if (event.type == SDL_QUIT) {
-    return false;
-  }
-  return true;
-}
-*/
+bool rect_color_flag = true;
+
+void toggle_rect_color() { rect_color_flag = !rect_color_flag; }
 
 void setup() {
   SDL_Init(SDL_INIT_VIDEO);
@@ -32,9 +25,14 @@ void setup() {
 void draw() {
   // set black background
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
   SDL_RenderClear(renderer);
   // draw green rect
-  SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+  if (rect_color_flag) {
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+  } else {
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+  }
   SDL_Rect rect = {.x = 10, .y = 10, .w = 150, .h = 100};
   SDL_RenderFillRect(renderer, &rect);
   // Update the screen with any rendering performed since the previous call.
@@ -47,14 +45,31 @@ void quit() {
   SDL_Quit();
 }
 
-// void main_loop() { handle_events(); }
+bool handle_events() {
+  SDL_Event event;
+  SDL_PollEvent(&event);
+  if (event.type == SDL_QUIT) {
+    return false;
+  }
+  if (event.type == SDL_MOUSEBUTTONDOWN) {
+    if (event.button.button == SDL_BUTTON_LEFT) {
+      toggle_rect_color();
+    }
+    draw();
+  }
+  return true;
+}
+
+void main_loop() { handle_events(); }
 
 int main() {
   setup();
 
+  draw();
+
   const int fps = 0;
   const int simulate_infinite_loop = 1;
-  emscripten_set_main_loop(draw, fps, simulate_infinite_loop);
+  emscripten_set_main_loop(main_loop, fps, simulate_infinite_loop);
 
   quit();
 
