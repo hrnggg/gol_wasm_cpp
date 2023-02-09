@@ -21,6 +21,12 @@ make build
 make run
 ```
 
+### format js/html/css
+```
+npm install
+npm run format .
+```
+
 ## References
 - [Drawing to canvas in Emscripten](https://web.dev/drawing-to-canvas-in-emscripten/)
 - [d0iasm/life-game.cpp](https://github.com/d0iasm/life-game.cpp)
